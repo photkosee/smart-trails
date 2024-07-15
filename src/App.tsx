@@ -1,7 +1,14 @@
 import "./App.css";
+import BodySection from "./components/custom/BodySection";
+import HeroSection from "./components/custom/HeroSection";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <HeroSection />
+      <BodySection />
+    </>
+  );
 }
 
 export default App;
