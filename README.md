@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+### Table of Contents
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. [Inspiration](#inspiration)
+2. [What this does?](#what-this-does)
+3. [Data Source](#data-source)
+4. [Credits](#credits)
+5. [Built With](#built-with)
+6. [Author](#author)
+7. [Deployment](#deployment)
 
-Currently, two official plugins are available:
+## Built With
+- Vite
+- React
+- Tailwind CSS
+- Shadcn/ui
+- Google APIs
+- [react-google-places-autocomplete](https://github.com/Tintef/react-google-places-autocomplete#readme)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Reflection
 
-## Expanding the ESLint configuration
+### Env Variables in Vite
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+I just realized that the way Vite handles environment variables is different from that in React and NextJs. Normally we'd use `process.env.*` but instead we need to use `import.meta.env.*` here in Vite.
 
-- Configure the top-level `parserOptions` property like this:
+And it does have extra functionality to prevent leaking env variables to the client, read more details [here](https://vitejs.dev/guide/env-and-mode), which is kinda cool.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Author
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Phot Koseekrainiramon
+- [LinkedIn](https://www.linkedin.com/in/phot-kosee/)
+- [GitHub](https://github.com/photkosee)
