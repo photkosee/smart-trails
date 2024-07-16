@@ -12,7 +12,7 @@
 - Vite
 - React
 - Tailwind CSS
-- Shadcn/ui
+- Ant Design
 - Google APIs
 - [react-google-places-autocomplete](https://github.com/Tintef/react-google-places-autocomplete#readme)
 

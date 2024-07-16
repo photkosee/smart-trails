@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { Button, message } from "antd";
 
 import { trailOptionProps, trailOptions } from "./trailOptions";
 import { difficultyOptionProps, difficultyOptions } from "./difficultyOptions";
@@ -8,8 +9,6 @@ import { memberOptionProps, memberOptions } from "./memberOptions";
 import { extraOptionProps, extraOptions } from "./extraOptions";
 import Checkbox from "./Checkbox";
 import MultiCheckbox from "./MultiCheckbox";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 export default function TrailForm() {
   const [fail, setFail] = useState(false);
@@ -18,16 +17,24 @@ export default function TrailForm() {
   const [difficulty, setDifficulty] = useState(difficultyOptions[0].name);
   const [member, setMember] = useState(memberOptions[0].name);
   const [extra, setExtra] = useState<string[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
   const apiKey = import.meta.env.VITE_GOOGLE_PLACE_API;
 
+  const error = () => {
+    messageApi.open({
+      type: "error",
+      content: "Please select a location where you want to explore",
+    });
+  };
+
   const onsubmit = () => {
-    !location &&
-      toast.error("Please select a location where you'd like to explore");
+    !location && error();
     // send a gemini api request to get the trails
   };
 
   return (
-    <div className="max-w-2xl w-full flex flex-col gap-9">
+    <form className="max-w-2xl w-full flex flex-col gap-9">
+      {contextHolder}
       <div className="flex flex-col gap-3">
         <h2 className="text-3xl font-extrabold text-[#00bf63]">
           Let us know your preferences
@@ -40,7 +47,7 @@ export default function TrailForm() {
 
       <div className="flex flex-col gap-3">
         <h3 className="text-xl font-bold">Where would you like to explore?</h3>
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col z-20">
           <GooglePlacesAutocomplete
             apiKey={apiKey}
             onLoadFailed={() => setFail(true)}
@@ -123,6 +130,6 @@ export default function TrailForm() {
       <div className="my-7 flex justify-end">
         <Button onClick={onsubmit}>Find trails</Button>
       </div>
-    </div>
+    </form>
   );
 }

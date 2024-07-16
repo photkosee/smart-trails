@@ -1,6 +1,6 @@
 import "./App.css";
-import BodySection from "./components/custom/BodySection";
-import HeroSection from "./components/custom/HeroSection";
+import BodySection from "./components/BodySection";
+import HeroSection from "./components/HeroSection";
 
 function App() {
   return (
