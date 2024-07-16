@@ -1,36 +1,55 @@
+import { useState } from "react";
+
 export interface CheckboxProps {
-  id: number;
   name: string;
   img?: string;
-  setState: (id: number) => void;
-  state: number;
+  setState: (name: string) => void;
+  state: string;
 }
 
-export default function Checkbox({ id, name, setState, state }: CheckboxProps) {
+export default function Checkbox({
+  name,
+  img,
+  setState,
+  state,
+}: CheckboxProps) {
+  const [load, setLoad] = useState(false);
+
   return (
     <label
-      className="relative size-[120px] md:size-[135px] cursor-pointer
-      rounded-xl shadow-md border hover:ring hover:ring-[#00bf63]/50
-      transition-all"
-      key={id}
+      className={`relative size-[120px] md:size-[135px] cursor-pointer
+      rounded-xl shadow-md border transition-all ${
+        state === name
+          ? "ring-[4px] ring-[#00bf63]"
+          : "hover:ring-[4px] hover:ring-[#00bf63]/30"
+      }`}
     >
+      <img
+        src={img}
+        className="absolute w-full h-full object-cover rounded-xl"
+        onLoad={() => setLoad(true)}
+      />
+
+      {!load && (
+        <div className="absolute w-full h-full bg-neutral-700 rounded-xl animate-pulse" />
+      )}
+
+      <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent rounded-xl" />
+
+      <div className="relative w-1/2 h-full text-white font-extrabold z-10">
+        <span className="absolute bottom-1 left-3">{name}</span>
+      </div>
+
       <input
         type="checkbox"
         name={name}
         className="peer sr-only"
-        onChange={() => setState(id)}
+        onChange={() => setState(name)}
       />
-      <div
-        className={`flex h-full w-full flex-col items-center justify-around rounded-lg
-        py-2 transition-all active:scale-95 ${
-          state === id && "ring ring-[#00bf63]"
-        }`}
-      >
-        <div>{name}</div>
-      </div>
+
       <span
         className={`absolute right-0 bottom-0 z-10 opacity-0 transition-all
-        ${state === id && "opacity-100"}`}
+        ${state === name && "opacity-100"}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
