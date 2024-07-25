@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { Button, message } from "antd";
 
 import { trailOptionProps, trailOptions } from "./trailOptions";
 import { difficultyOptionProps, difficultyOptions } from "./difficultyOptions";
@@ -9,32 +8,34 @@ import { memberOptionProps, memberOptions } from "./memberOptions";
 import { extraOptionProps, extraOptions } from "./extraOptions";
 import Checkbox from "./Checkbox";
 import MultiCheckbox from "./MultiCheckbox";
+import { chatSession } from "@/api/GeminiModel";
+import { Alert, Box, Button, Collapse, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function TrailForm() {
-  const [fail, setFail] = useState(false);
   const [location, setLocation] = useState("");
   const [trail, setTrail] = useState(trailOptions[0].name);
   const [difficulty, setDifficulty] = useState(difficultyOptions[0].name);
   const [member, setMember] = useState(memberOptions[0].name);
   const [extra, setExtra] = useState<string[]>([]);
-  const [messageApi, contextHolder] = message.useMessage();
+  const [open, setOpen] = useState(true);
   const apiKey = import.meta.env.VITE_GOOGLE_PLACE_API;
 
-  const error = () => {
-    messageApi.open({
-      type: "error",
-      content: "Please select a location where you want to explore",
-    });
-  };
+  const onsubmit = async () => {
+    const user = localStorage.getItem("user");
 
-  const onsubmit = () => {
-    !location && error();
+    if (!user) {
+      return;
+    }
+
     // send a gemini api request to get the trails
+    const prompt = "";
+
+    const result = await chatSession.sendMessage(prompt);
   };
 
   return (
-    <form className="max-w-2xl w-full flex flex-col gap-9">
-      {contextHolder}
+    <form className="max-w-2xl w-full flex flex-col gap-9 relative">
       <div className="flex flex-col gap-3">
         <h2 className="text-3xl font-extrabold text-[#00bf63]">
           Let us know your preferences
@@ -50,15 +51,14 @@ export default function TrailForm() {
         <div className="w-full flex flex-col z-20">
           <GooglePlacesAutocomplete
             apiKey={apiKey}
-            onLoadFailed={() => setFail(true)}
             debounce={700}
             selectProps={{
               onChange: (value) => {
                 value && setLocation(value.label);
+                value && setOpen(false);
               },
             }}
           />
-          {fail && <p className="text-red-500 self-end">Failed to load</p>}
         </div>
       </div>
 
@@ -127,9 +127,38 @@ export default function TrailForm() {
         </div>
       </div>
 
-      <div className="my-7 flex justify-end">
-        <Button onClick={onsubmit}>Find trails</Button>
-      </div>
+      <Box sx={{ width: "100%" }}>
+        <Collapse in={open}>
+          <Alert
+            severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
+          >
+            Please select the place you want to explore
+          </Alert>
+        </Collapse>
+        <Button
+          disabled={open}
+          variant="outlined"
+          onClick={() => {
+            setOpen(true);
+          }}
+          className="w-full"
+        >
+          Find Trails
+        </Button>
+      </Box>
     </form>
   );
 }

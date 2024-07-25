@@ -9,12 +9,13 @@
 7. [Deployment](#deployment)
 
 ## Built With
-- Vite
-- React
+- Vite 5
+- React 18
 - Tailwind CSS
-- Ant Design
+- MUI
 - Google APIs
 - [react-google-places-autocomplete](https://github.com/Tintef/react-google-places-autocomplete#readme)
+- React OAuth2 | Google
 
 ## Reflection
 
@@ -23,6 +24,12 @@
 I just realized that the way Vite handles environment variables is different from that in React and NextJs. Normally we'd use `process.env.*` but instead we need to use `import.meta.env.*` here in Vite.
 
 And it does have extra functionality to prevent leaking env variables to the client, read more details [here](https://vitejs.dev/guide/env-and-mode), which is kinda cool.
+
+## Further Improvements
+
+### Performing API calls on server
+
+Ideally you'd want to call then from the server since doing those on client can be risky for security issue.
 
 ## Author
 

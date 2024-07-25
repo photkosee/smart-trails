@@ -1,5 +1,5 @@
-import { Button } from "antd";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export default function HeroSection() {
   return (
@@ -22,7 +22,9 @@ export default function HeroSection() {
         </p>
 
         <Link to="/create-trail">
-          <Button>Start Discovering</Button>
+          <Button variant="contained" className="text-white">
+            Start Discovering
+          </Button>
         </Link>
       </div>
     </div>

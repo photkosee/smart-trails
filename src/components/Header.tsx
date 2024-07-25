@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button } from "@mui/material";
 
 export default function Header() {
   return (
@@ -9,7 +9,9 @@ export default function Header() {
           SmartTrails
         </div>
 
-        <Button>Sign In</Button>
+        <Button variant="contained" className="text-white">
+          Sign In
+        </Button>
       </div>
     </div>
   );
