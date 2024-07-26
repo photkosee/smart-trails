@@ -1,12 +1,17 @@
+# <p align="center"><a href="https://github.com/photkosee/smart-trails"><img width="350" src="./public/SmartTrails.png"></a></p>
+
+<p align="center">Find your perfect trail with Gemini AI-powered search tailored to your requirements. <a href="https://github.com/photkosee/smart-trails">Try it out now!</a></p>
+
 ### Table of Contents
 
-1. [Inspiration](#inspiration)
-2. [What this does?](#what-this-does)
-3. [Data Source](#data-source)
-4. [Credits](#credits)
-5. [Built With](#built-with)
-6. [Author](#author)
-7. [Deployment](#deployment)
+- [Inspiration](#inspiration)
+- [What this does?](#what-this-does)
+- [Built With](#built-with)
+- [Author](#author)
+
+## What this does?
+
+This app, powered by Gemini AI, helps users find the perfect trails by matching their specific requirements. Simply input your preferences, and our AI will search and recommend the best trails just for you.
 
 ## Built With
 - Vite 5
@@ -29,7 +34,7 @@ And it does have extra functionality to prevent leaking env variables to the cli
 
 ### Performing API calls on server
 
-Ideally you'd want to call then from the server since doing those on client can be risky for security issue.
+Ideally you'd want to call them from the server side since performing the action that require keys on client side can be risky for security issue.
 
 ## Author
 
